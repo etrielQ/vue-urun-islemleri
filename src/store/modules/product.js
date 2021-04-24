@@ -10,7 +10,9 @@ const getters = {
         return state.products;
     },
     getProduct(state){
-
+        return key => state.products.filter(element =>{
+            return element.key == key;
+        })
     }
 }
 
@@ -48,8 +50,27 @@ const actions = {
             router.replace("/")
         })
     },
-    sellProduct({ commit }, payload){
+    sellProduct({ state, commit, dispatch }, payload){
         // Vue Resource İşlemleri
+
+        let product = state.products.filter(element =>{
+            return element.key == payload.key;
+        });
+        if(product){
+         let totalCount = product[0].count - payload.count;
+         Vue.http.patch("https://vuejs-urun-islemleri-9969d-default-rtdb.firebaseio.com/products/" + payload.key + '.json', {count : totalCount})
+         .then(response => {
+             product[0].count = totalCount;
+             let tradeResult = {
+                purchase : 0,
+                sale : product[0].price,
+                count : payload.count,
+            }
+            dispatch("setTradeResult", tradeResult)
+            router.replace("/")
+         })
+        }
+
     }
 }
 
