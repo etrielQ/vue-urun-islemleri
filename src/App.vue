@@ -18,6 +18,9 @@ export default {
   data () {
     return {
     }
+  },
+  created(){
+     this.$store.dispatch("getTradeResult")
   }
 }
 </script>
