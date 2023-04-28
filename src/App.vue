@@ -9,41 +9,64 @@
 </template>
 
 <script>
-import Header from './components/shared/Header';
-import Footer from './components/shared/Footer';
+import Header from "./components/shared/Header";
+import Footer from "./components/shared/Footer";
+
+import firebase from "./firebaseInit";
+import 'firebase/firestore';
+
+const db = firebase.firestore();
+
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    appHeader : Header,
-    appFooter : Footer,
+    appHeader: Header,
+    appFooter: Footer,
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
-  created(){
-     this.$store.dispatch("getTradeResult")
-     this.$store.dispatch("initApp")
-  }
-}
+  created() {
+    this.$store.dispatch("getTradeResult");
+    this.$store.dispatch("initApp");
+  },
+  mounted(){
+    console.log('bbb')
+    this.readEmployees()
+  },
+  methods: {
+    readEmployees() {
+      db.collection("products")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            console.log('aaaa')
+            console.log(doc.data());
+          });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    },
+  },
+};
 </script>
 
 <style>
-body{
+body {
   background: #a7a8bb5c;
 }
-.fade-enter{
-opacity: 0;
-}
-.fade-enter-active{
-  opacity: 1;
-transition: .3s ease-out;
-}
-.fade-leave{
-
-}
-.fade-leave-active{
+.fade-enter {
   opacity: 0;
-  transition: .3s ease-out;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: 0.3s ease-out;
+}
+.fade-leave {
+}
+.fade-leave-active {
+  opacity: 0;
+  transition: 0.3s ease-out;
 }
 </style>

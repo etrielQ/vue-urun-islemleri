@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar fixed-bottom  navbar-light" style="background-color: #e3f2fd;">
         <span class="navbar-text mr-auto">
-            <strong>vue.js urun islemleri app </strong> | alperencelik
+            <strong>vue.js urun islemleri app </strong> | hasanenesgüler
         </span>
         <span class="navbar-text navbar-nav my-2 my-lg-0 mr-3">
             <strong>Alış Tutarı : </strong>
