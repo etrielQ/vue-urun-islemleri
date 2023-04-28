@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import Header from "./components/shared/Header";
-import Footer from "./components/shared/Footer";
+import Header from "./components/shared/Header"
+import Footer from "./components/shared/Footer"
 
-import firebase from "./firebaseInit";
-import 'firebase/firestore';
+// import firebase from "./firebaseInit";
+// import 'firebase/firestore';
 
-const db = firebase.firestore();
+// const db = firebase.firestore();
 
 export default {
   name: "app",
@@ -24,32 +24,32 @@ export default {
     appFooter: Footer,
   },
   data() {
-    return {};
+    return {}
   },
   created() {
-    this.$store.dispatch("getTradeResult");
-    this.$store.dispatch("initApp");
+    this.$store.dispatch("getTradeResult")
+    this.$store.dispatch("initApp")
   },
-  mounted(){
-    console.log('bbb')
-    this.readEmployees()
+  mounted() {
+    console.log("bbb")
+    // this.readEmployees()
   },
   methods: {
-    readEmployees() {
-      db.collection("products")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            console.log('aaaa')
-            console.log(doc.data());
-          });
-        })
-        .catch((error) => {
-          console.log("Error getting documents: ", error);
-        });
-    },
+    // readEmployees() {
+    //   db.collection("products")
+    //     .get()
+    //     .then((querySnapshot) => {
+    //       querySnapshot.forEach((doc) => {
+    //         console.log('aaaa')
+    //         console.log(doc.data());
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.log("Error getting documents: ", error);
+    //     });
+    // },
   },
-};
+}
 </script>
 
 <style>
